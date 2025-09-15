@@ -4,7 +4,7 @@ COPY src /app/src
 COPY pom.xml /app
 
 WORKDIR /app
-RUN mvn clean install
+RUN mvn clean package -DskipTests
 
 FROM amazoncorretto:21
 
@@ -12,6 +12,6 @@ COPY --from=build /app/target/*.jar /app/app.jar
 
 WORKDIR /app
 
-EXPOSE 8082
+EXPOSE 8888
 
 CMD ["java", "-jar", "app.jar"]
